@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#2563eb" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="調査マップ Pro" />
+    <link rel="manifest" href="data:application/manifest+json,{&quot;name&quot;:&quot;調査マップ Pro&quot;,&quot;short_name&quot;:&quot;調査Pro&quot;,&quot;start_url&quot;:&quot;.&quot;,&quot;display&quot;:&quot;standalone&quot;,&quot;background_color&quot;:&quot;#f8fafc&quot;,&quot;theme_color&quot;:&quot;#2563eb&quot;}" />
+    <title>現地調査 Pro - 吹き出し強化版</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+// 簡易オフライン起動対応
+if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+    window.addEventListener('load', () => {
+        const swCode = `
+            const CACHE_NAME = 'survey-pro-mobile-v1';
+            self.addEventListener('install', event => {
+                event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll([
+                    './',
+                    'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css',
+                    'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js',
+                    'https://unpkg.com/dexie@3.2.4/dist/dexie.js',
+                    'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js',
+                    'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js'
+                ])));
+            });
+            self.addEventListener('fetch', event => {
+                event.respondWith(caches.match(event.request).then(response => response || fetch(event.request)));
+            });
+        `;
+        const blob = new Blob([swCode], {type: 'text/javascript'});
+        navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(() => {});
+    });
+}
+
+</script>
+    <script src="https://unpkg.com/dexie@3.2.4/dist/dexie.js">
+// 簡易オフライン起動対応
+if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+    window.addEventListener('load', () => {
+        const swCode = `
+            const CACHE_NAME = 'survey-pro-mobile-v1';
+            self.addEventListener('install', event => {
+                event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll([
+                    './',
+                    'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css',
+                    'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js',
+                    'https://unpkg.com/dexie@3.2.4/dist/dexie.js',
+                    'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js',
+                    'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js'
+                ])));
+            });
+            self.addEventListener('fetch', event => {
+                event.respondWith(caches.match(event.request).then(response => response || fetch(event.request)));
+            });
+        `;
+        const blob = new Blob([swCode], {type: 'text/javascript'});
+        navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(() => {});
+    });
+}
+
+</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js">
+// 簡易オフライン起動対応
+if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+    window.addEventListener('load', () => {
+        const swCode = `
+            const CACHE_NAME = 'survey-pro-mobile-v1';
+            self.addEventListener('install', event => {
+                event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll([
+                    './',
+                    'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css',
+                    'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js',
+                    'https://unpkg.com/dexie@3.2.4/dist/dexie.js',
+                    'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js',
+                    'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js'
+                ])));
+            });
+            self.addEventListener('fetch', event => {
+                event.respondWith(caches.match(event.request).then(response => response || fetch(event.request)));
+            });
+        `;
+        const blob = new Blob([swCode], {type: 'text/javascript'});
+        navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(() => {});
+    });
+}
+
+</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js">
+// 簡易オフライン起動対応
+if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+    window.addEventListener('load', () => {
+        const swCode = `
+            const CACHE_NAME = 'survey-pro-mobile-v1';
+            self.addEventListener('install', event => {
+                event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll([
+                    './',
+                    'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css',
+                    'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js',
+                    'https://unpkg.com/dexie@3.2.4/dist/dexie.js',
+                    'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js',
+                    'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js'
+                ])));
+            });
+            self.addEventListener('fetch', event => {
+                event.respondWith(caches.match(event.request).then(response => response || fetch(event.request)));
+            });
+        `;
+        const blob = new Blob([swCode], {type: 'text/javascript'});
+        navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(() => {});
+    });
+}
+
+</script>
+    <style>
+        :root { --sidebar-width: 260px; --primary: #2563eb; --bg: #f8fafc; --text: #1e293b; }
+        body { margin: 0; font-family: sans-serif; background: var(--bg); color: var(--text); overflow: hidden; }
+        .app-shell { display: flex; height: 100vh; width: 100vw; }
+        .sidebar { width: var(--sidebar-width); background: #1e293b; color: white; display: flex; flex-direction: column; flex-shrink: 0; z-index: 3000; }
+        .brand { padding: 20px; border-bottom: 1px solid #334155; font-weight: bold; }
+        .step { width: 100%; border: none; background: none; color: #94a3b8; padding: 18px 20px; text-align: left; cursor: pointer; display: flex; align-items: center; gap: 15px; font-size: 15px; border-bottom: 1px solid #334155; }
+        .step.is-active { color: white; background: #0f172a; }
+        .step span { width: 26px; height: 26px; border: 2px solid #475569; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+        .step.is-active span { background: var(--primary); border-color: var(--primary); }
+        .workspace { flex: 1; display: flex; flex-direction: column; overflow: hidden; position: relative; }
+        .topbar { padding: 12px 25px; background: white; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; z-index: 2500; }
+        .view { display: none !important; flex: 1; padding: 25px; overflow-y: auto; height: 100%; width: 100%; box-sizing: border-box; }
+        .view.is-visible { display: flex !important; flex-direction: column; }
+        .map-ui { display: none !important; }
+        .is-editor-active .map-ui { display: flex !important; }
+        .edit-tools { position: absolute; top: 15px; left: 15px; z-index: 1000; background: white; padding: 10px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); flex-direction: column; gap: 8px; }
+        .tool-btn { display: flex; align-items: center; gap: 10px; padding: 12px 15px; border: 2px solid #e2e8f0; border-radius: 8px; background: white; cursor: pointer; font-size: 14px; font-weight: bold; min-width: 140px; }
+        .tool-btn.active { background: #ffeb3b; border-color: #fbc02d; }
+        .color-picker { display: flex; gap: 6px; padding: 5px; justify-content: center; }
+        .color-dot { width: 24px; height: 24px; border-radius: 50%; border: 2px solid white; cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+        .color-dot.active { border-color: #333; transform: scale(1.1); }
+        #map { height: 100%; width: 100%; background: #cbd5e1; }
+        #edit-panel { position: absolute; bottom: 0; left: 0; right: 0; background: white; z-index: 4000; padding: 20px; border-top: 5px solid var(--primary); display: none; box-shadow: 0 -10px 30px rgba(0,0,0,0.2); max-height: 80vh; overflow-y: auto; }
+        .text-label { background:none!important; border:none!important; font-weight:bold; text-shadow: 1px 1px 0 #fff, -1px -1px 0 #fff; white-space: nowrap; }
+        
+        /* 吹き出し用CSS：ズームに応じて詳細を隠す */
+        .zoom-hide { display: none; }
+        .map-zoomed-in .zoom-hide { display: inline; }
+
+        .form-panel { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        label { display: block; margin-top: 10px; font-size: 12px; font-weight: bold; color: #64748b; }
+        input, select, textarea { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #e2e8f0; border-radius: 6px; box-sizing: border-box; font-size: 16px; }
+        button.primary { background: var(--primary); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+        .badge { display: inline-block; background: #f1f5f9; padding: 4px 10px; border-radius: 4px; font-size: 12px; margin: 0 5px 5px 0; border: 1px solid #e2e8f0; }
+
+        @media print {
+            .sidebar, .topbar, .edit-tools, .page-nav, #edit-panel, button, .mobile-nav-toggle, .map-ui-toggle { display: none !important; }
+            .workspace, .view, #review { display: block !important; position: static !important; width: 100% !important; height: auto !important; overflow: visible !important; padding: 0 !important; }
+            body { overflow: visible !important; background: white !important; color: #000 !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
+            #reviewArea, #reviewArea * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
+            #reviewArea { padding: 16px !important; }
+            table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+            th, td { border: 1px solid #999; padding: 6px; font-size: 11px; text-align: left; vertical-align: top; }
+            th { background: #eee !important; }
+        }
+        @media (max-width: 1100px), (hover: none) and (pointer: coarse) and (max-width: 1366px) { .sidebar { width: 90px; } .step { padding: 14px 8px; font-size: 11px; gap: 6px; flex-direction: column; } .brand { font-size: 12px; padding: 14px 8px; } }
+    
+        /* スマホ起動・操作対応 */
+        @media (max-width: 1100px), (hover: none) and (pointer: coarse) and (max-width: 1366px) {
+            body { overflow: hidden; }
+            .app-shell { flex-direction: column; }
+            .sidebar {
+                width: 100%;
+                height: 64px;
+                order: 2;
+                flex-direction: row;
+                overflow-x: auto;
+                overflow-y: hidden;
+                z-index: 5000;
+            }
+            .brand { display: none; }
+            .steps { display: flex; width: 100%; min-width: 520px; }
+            .step {
+                min-width: 104px;
+                justify-content: center;
+                flex-direction: column;
+                gap: 2px;
+                padding: 6px 4px;
+                font-size: 11px;
+                border-bottom: none;
+                border-right: 1px solid #334155;
+                white-space: nowrap;
+            }
+            .step span {
+                width: 20px;
+                height: 20px;
+                font-size: 10px;
+            }
+            .workspace {
+                order: 1;
+                height: calc(100vh - 64px);
+                width: 100vw;
+            }
+            .topbar {
+                padding: 8px 10px;
+                min-height: 42px;
+            }
+            .topbar h1 {
+                font-size: 15px !important;
+            }
+            .view {
+                padding: 12px;
+            }
+            #setup > div {
+                flex-direction: column !important;
+                gap: 10px !important;
+            }
+            #editor {
+                padding: 0 !important;
+            }
+            .edit-tools {
+                top: 54px;
+                left: 8px;
+                max-height: calc(100vh - 145px);
+                overflow-y: auto;
+                padding: 6px;
+                gap: 5px;
+            }
+            .tool-btn {
+                min-width: 94px;
+                padding: 9px 8px;
+                font-size: 12px;
+                gap: 6px;
+            }
+            .page-nav {
+                top: 54px !important;
+                right: 8px !important;
+                padding: 6px !important;
+                gap: 5px !important;
+                font-size: 12px;
+                flex-wrap: wrap;
+                max-width: 52vw;
+                justify-content: flex-end;
+            }
+            .page-nav button,
+            button.primary {
+                padding: 8px 10px;
+                font-size: 12px;
+            }
+            #edit-panel {
+                max-height: 58vh;
+                padding: 12px;
+                padding-bottom: env(safe-area-inset-bottom);
+            }
+            input, select, textarea {
+                font-size: 16px;
+            }
+            #projectGrid {
+                grid-template-columns: 1fr !important;
+            }
+        }
+
+        @media (display-mode: standalone) {
+            .topbar { padding-top: max(8px, env(safe-area-inset-top)); }
+        }
+
+
+        .mobile-nav-toggle { display:none; }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                box-shadow: 0 -4px 16px rgba(0,0,0,0.18);
+                transition: transform .22s ease;
+            }
+            .workspace {
+                transition: height .22s ease;
+            }
+            body.sidebar-hidden .sidebar {
+                transform: translateY(100%);
+            }
+            body.sidebar-hidden .workspace {
+                height: 100vh;
+            }
+            .mobile-nav-toggle {
+                display: inline-flex !important;
+                position: fixed;
+                right: 12px;
+                bottom: 76px;
+                z-index: 6000;
+                border: none;
+                border-radius: 999px;
+                background: #1e293b;
+                color: #fff;
+                padding: 10px 14px;
+                font-size: 13px;
+                box-shadow: 0 4px 14px rgba(0,0,0,.25);
+                align-items: center;
+                justify-content: center;
+            }
+            body.sidebar-hidden .mobile-nav-toggle {
+                bottom: 12px;
+            }
+        }
+
+        @media (max-width: 1024px) and (orientation: landscape) {
+            .sidebar {
+                height: 52px !important;
+            }
+            .steps {
+                min-width: 520px;
+            }
+            .step {
+                min-width: 92px;
+                font-size: 10px;
+                padding: 4px 4px;
+                gap: 1px;
+            }
+            .workspace {
+                height: calc(100vh - 52px) !important;
+            }
+            body.sidebar-hidden .workspace {
+                height: 100vh !important;
+            }
+            .edit-tools {
+                top: 50px !important;
+                max-height: calc(100vh - 110px) !important;
+            }
+            .page-nav {
+                top: 50px !important;
+                max-width: 58vw !important;
+            }
+            #edit-panel {
+                max-height: 52vh !important;
+            }
+            .mobile-nav-toggle {
+                bottom: 62px;
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            body.sidebar-hidden .mobile-nav-toggle {
+                bottom: 10px;
+            }
+        }
+
+    
+        .map-ui-toggle { display:none; }
+        body.map-ui-hidden .edit-tools,
+        body.map-ui-hidden #pdfPageNav {
+            display: none !important;
+        }
+
+        @media (max-width: 1100px), (hover: none) and (pointer: coarse) and (max-width: 1366px) {
+            .map-ui-toggle {
+                display: inline-flex !important;
+                position: fixed;
+                right: 12px;
+                bottom: 122px;
+                z-index: 6000;
+                border: none;
+                border-radius: 999px;
+                background: #2563eb;
+                color: #fff;
+                padding: 10px 14px;
+                font-size: 13px;
+                box-shadow: 0 4px 14px rgba(0,0,0,.25);
+                align-items: center;
+                justify-content: center;
+            }
+            body.sidebar-hidden .map-ui-toggle {
+                bottom: 58px;
+            }
+            body:not(.editor-view) .map-ui-toggle {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 1024px) and (orientation: landscape), (hover: none) and (pointer: coarse) and (max-width: 1366px) and (orientation: landscape) {
+            .map-ui-toggle {
+                bottom: 54px;
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            body.sidebar-hidden .map-ui-toggle {
+                bottom: 10px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="app-shell">
+<button id="mobileNavToggle" class="mobile-nav-toggle" type="button" onclick="toggleMobileNav()">☰ メニュー</button>
+<button id="mapUiToggle" class="map-ui-toggle" type="button" onclick="toggleMapUi()">🛠 ツール非表示</button>
+    <aside class="sidebar">
+        <div class="brand">調査マップ Pro</div>
+        <nav class="steps">
+            <button class="step" id="step-projects" onclick="switchView('projects')"><span>1</span>現場一覧</button>
+            <button class="step" id="step-setup" onclick="switchView('setup')"><span>2</span>現場・項目作成</button>
+            <button class="step" id="step-editor" onclick="switchView('editor')"><span>3</span>図面・地図編集</button>
+            <button class="step" id="step-review" onclick="switchView('review')"><span>4</span>詳細確認</button>
+            <button class="step" id="step-export" onclick="switchView('export')"><span>5</span>出力・共有</button>
+        </nav>
+    </aside>
+
+    <main class="workspace" id="mainWorkspace">
+        <header class="topbar">
+            <div><button class="map-ui" onclick="switchView('projects')" style="margin-right:10px; cursor:pointer; padding:5px 10px;">◀ 一覧</button><h1 id="viewTitle" style="display:inline; font-size:18px;">現場一覧</h1></div>
+            <div id="topContext" style="font-size:12px; color:#64748b;"></div>
+        </header>
+
+        <section class="view is-visible" id="projects">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <h2>登録現場</h2>
+                <div><input type="file" id="importFile" style="display:none;" onchange="importProject(this)"><button class="primary" onclick="document.getElementById('importFile').click()">📥 読込</button> <button class="primary" onclick="switchView('setup')">＋ 新規</button></div>
+            </div>
+            
+            <div id="mobileInstallHint" style="display:none; background:#eff6ff; border:1px solid #bfdbfe; color:#1e3a8a; padding:10px; border-radius:10px; margin-top:10px; font-size:13px;">
+                スマホで使う場合：このHTMLをスマホで開き、共有メニューから「ホーム画面に追加」するとアプリのように起動できます。
+            </div>
+            <div id="projectGrid" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap:15px; margin-top:20px;"></div>
+        </section>
+
+        <section class="view" id="setup">
+            <div style="display:flex; gap:20px;">
+                <div class="form-panel" style="flex:1;">
+                    <h3>基本設定</h3>
+                    <label>現場名 <input id="setupName" placeholder="〇〇マンション調査"></label>
+                    <label>タイプ <select id="setupMode" onchange="toggleSetupUI()"><option value="pdf">図面(PDF/画像)</option><option value="gsi">地図(GSI)</option></select></label>
+                    <div id="pdfGroup"><label>ファイル(PDF/画像) <input type="file" id="setupFile" accept="application/pdf,image/*"></label></div>
+                    <label>担当者 <input id="setupAuthor"></label>
+                </div>
+                <div class="form-panel" style="flex:1;">
+                    <h3>項目(プリセット)</h3>
+                    <label>保存済みセット <select id="presetLoader" onchange="loadPresetToForm()"></select></label>
+                    <div id="customFieldList" style="margin:10px 0;"></div>
+                    <input id="newFieldName" placeholder="項目名"> <label style="font-size:11px;"><input type="checkbox" id="newFieldPhoto"> 写真撮影あり</label>
+                    <div style="display:flex; gap:8px; margin-top:10px;">
+                        <button class="primary" onclick="addFieldToForm()" style="flex:1;">追加</button>
+                        <button class="primary" onclick="saveCurrentAsPreset()" style="flex:1; background:#64748b;">プリセット保存</button>
+                    </div>
+                </div>
+            </div>
+            <button class="primary" style="width:100%; padding:20px; margin-top:20px;" onclick="startSetup()">調査を開始する</button>
+        </section>
+
+        <section class="view" id="editor" style="padding:0; position:relative;">
+            <div class="page-nav map-ui" id="pdfPageNav" style="position:absolute; top:15px; right:15px; z-index:1000; background:rgba(255,255,255,0.9); padding:10px; border-radius:12px; display:none; align-items:center; gap:10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                <button class="primary" onclick="changePage(-1)">◀ 前</button>
+                <span id="curPage">1</span> / <span id="totalPage">1</span>
+                <button class="primary" onclick="changePage(1)">次 ▶</button>
+                <button class="primary" onclick="rotateView()" style="background:#64748b;">🔄 回転</button>
+            </div>
+            <div class="edit-tools map-ui">
+                <button class="tool-btn" id="btn-locate" onclick="moveToCurrentLocation()" style="display:none; background:#e0f2fe; border-color:#38bdf8;">📍 現在地に移動</button>
+                <button class="tool-btn active" id="mode-select" onclick="setMode('select')">👆 移動</button>
+                <button class="tool-btn" id="mode-pin" onclick="setMode('pin')">📌 ピン</button>
+                <button class="tool-btn" id="mode-arrow" onclick="setMode('arrow')">⤴️ 矢印</button>
+                <button class="tool-btn" id="mode-text" onclick="setMode('text')">Ａ 文字</button>
+                <button class="tool-btn" id="mode-draw" onclick="setMode('draw')">✏️ 手書き</button>
+                <div class="color-picker">
+                    <div class="color-dot active" style="background:#ff0000" data-color="#ff0000"></div>
+                    <div class="color-dot" style="background:#2563eb" data-color="#2563eb"></div>
+                    <div class="color-dot" style="background:#16a34a" data-color="#16a34a"></div>
+                    <div class="color-dot" style="background:#000000" data-color="#000000"></div>
+                </div>
+                <button class="tool-btn" onclick="undoLast()">↩️ 戻る</button>
+            </div>
+            <div id="map"></div>
+            <div id="edit-panel"><div id="dynamicInputsArea"></div><button class="primary" style="width:100%; margin-top:20px;" onclick="saveAnnot()">内容を保存して閉じる</button><button onclick="deleteAnnot()" style="width:100%; border:none; color:red; background:none; margin-top:10px;">削除</button></div>
+        </section>
+
+        <section class="view" id="review"><div id="reviewArea"></div></section>
+        <section class="view" id="export">
+            <h1>出力</h1>
+            <div class="form-panel">
+                <button class="primary" onclick="preparePrint()">報告書(PDF)を作成</button>
+                <button class="primary" style="margin-top:15px; background:#059669;" onclick="exportGeoJSON()">GIS(GeoJSON)保存</button>
+                <button class="primary" style="margin-top:15px; background:#64748b;" onclick="exportCSV()">CSV保存</button>
+            </div>
+        </section>
+    </main>
+</div>
+
+<script>
+/** 1. DB & State **/
+const db = new Dexie("SurveyFinalBalloonDB");
+db.version(1).stores({ projects: "id, name, updatedAt", annotations: "id, projectId, page, isDeleted, updatedAt", presets: "id, name" });
+let currentProjectId = null, currentMode = 'select', currentColor = '#ff0000', map = null;
+let markers = {}, selectedId = null, currentFields = [{name:"写真番号", photo:false}, {name:"メモ", photo:false}, {name:"座標", photo:false}], currentPdf = null, currentPage = 1, currentRotation = 0;
+const tempFieldPhotos = {};
+let latestMapCapture = null;
+
+const esc = (s) => s ? s.toString().replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])) : "";
+const blobToBase64 = (blob) => new Promise((res) => { if(!blob){res(null);return;} const r = new FileReader(); r.onloadend = () => res(r.result); r.readAsDataURL(blob); });
+const wait = (ms) => new Promise(res => setTimeout(res, ms));
+
+async function captureCurrentMapView() {
+    if(!map) return null;
+    const visibleView = document.querySelector('.view.is-visible')?.id || 'editor';
+    if(visibleView !== 'editor') switchView('editor');
+    await wait(350);
+    map.invalidateSize();
+    await wait(350);
+    const mapEl = document.getElementById('map');
+    const canvas = await html2canvas(mapEl, { useCORS: true, allowTaint: false, backgroundColor: '#ffffff', scale: 2, logging: false });
+    latestMapCapture = {
+        url: canvas.toDataURL('image/png'),
+        width: canvas.width,
+        height: canvas.height,
+        center: map.getCenter(),
+        zoom: map.getZoom()
+    };
+    return latestMapCapture;
+}
+
+function moveToCurrentLocation() {
+    if(!map) return alert("地図を開いてください");
+    if(!navigator.geolocation) return alert("この端末では現在地を取得できません");
+    navigator.geolocation.getCurrentPosition(
+        pos => {
+            const lat = pos.coords.latitude;
+            const lng = pos.coords.longitude;
+            map.setView([lat, lng], 17);
+            if(window.currentLocationMarker) map.removeLayer(window.currentLocationMarker);
+            window.currentLocationMarker = L.circleMarker([lat, lng], { radius: 8, weight: 3 }).addTo(map).bindTooltip("現在地", {permanent:false});
+        },
+        () => alert("現在地を取得できません。ブラウザの位置情報許可を確認してください"),
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+    );
+}
+
+/** 2. View Switcher (FIXED) **/
+function switchView(id) {
+    const views = ['projects', 'setup', 'editor', 'review', 'export'];
+    views.forEach(v => {
+        const el = document.getElementById(v); if(el) el.classList.remove('is-visible');
+        const st = document.getElementById('step-'+v); if(st) st.classList.remove('is-active');
+    });
+    document.getElementById(id).classList.add('is-visible');
+    const step = document.getElementById('step-'+id); if(step) step.classList.add('is-active');
+    const ws = document.getElementById('mainWorkspace');
+    if(id==='editor') { ws.classList.add('is-editor-active'); document.body.classList.add('editor-view'); } else { ws.classList.remove('is-editor-active'); document.body.classList.remove('editor-view'); }
+    updateFloatingToggleLabels();
+    document.getElementById('viewTitle').textContent = step ? step.textContent.replace(/[0-9]/g, '') : "一覧";
+
+    if(id==='projects') loadProjects();
+    if(id==='review' || id==='export') loadReview();
+    if(id==='editor' && map) { setTimeout(() => { map.invalidateSize(); }, 300); }
+    if(isCompactScreen()) {
+        document.body.classList.add('sidebar-hidden');
+        updateFloatingToggleLabels();
+    }
+}
+
+/** 3. Map & File Handling **/
+async function startSetup() {
+    const name = document.getElementById('setupName').value; if(!name) return alert("名入力");
+    const id = crypto.randomUUID(), mode = document.getElementById('setupMode').value;
+    const f = document.getElementById('setupFile').files[0];
+    let pdfData = null, bgBlob = null;
+    if(mode === 'pdf' && f) { if(f.type.includes('pdf')) pdfData = await f.arrayBuffer(); else bgBlob = f; }
+    await db.projects.add({ id, name, mode, pdfData, bgBlob, fields: [...currentFields], author: document.getElementById('setupAuthor').value, updatedAt: Date.now(), rotation: 0 });
+    selectProject(id);
+}
+
+async function selectProject(id) {
+    const p = await db.projects.get(id); currentProjectId = id; currentFields = p.fields; currentRotation = p.rotation || 0;
+    document.getElementById('topContext').textContent = `${p.name} / ${p.author||'--'}`;
+    switchView('editor'); 
+    currentPdf = null;
+    currentPage = 1;
+    closeEdit();
+    if(map) map.remove();
+    map = L.map('map', { crs: p.mode === 'pdf' ? L.CRS.Simple : L.CRS.EPSG3857, minZoom:-3, maxZoom:18 });
+    const locateBtn = document.getElementById('btn-locate');
+    if(locateBtn) locateBtn.style.display = (p.mode === 'gsi') ? 'flex' : 'none';
+
+    if(p.mode === 'pdf') {
+        if(p.pdfData) {
+            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+            currentPdf = await pdfjsLib.getDocument({data: p.pdfData}).promise;
+            document.getElementById('totalPage').textContent = currentPdf.numPages;
+            document.getElementById('pdfPageNav').style.display = 'flex';
+            await loadPdfPage(1);
+        } else if(p.bgBlob) {
+            document.getElementById('pdfPageNav').style.display = 'flex';
+            document.getElementById('totalPage').textContent = "1";
+            document.getElementById('curPage').textContent = "1";
+            renderImageWithRotation(p.bgBlob);
+        }
+    } else {
+        L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png', {crossOrigin: true, attribution: 'GSI'}).addTo(map);
+        document.getElementById('pdfPageNav').style.display = 'none'; map.setView([35.68, 139.76], 15);
+    }
+    map.on('click', e => { if(['pin','arrow','text'].includes(currentMode)) addAnnot(e.latlng); else closeEdit(); });
+    setupDrawing(); refreshAnnotations();
+
+    // スマート表示用のズーム監視
+    map.on('zoomend', () => {
+        const z = map.getZoom();
+        const container = map.getContainer();
+        (z > 0) ? container.classList.add('map-zoomed-in') : container.classList.remove('map-zoomed-in');
+    });
+}
+
+async function loadPdfPage(num) {
+    currentPage = num;
+    const cur = document.getElementById('curPage');
+    if(cur) cur.textContent = num;
+    const page = await currentPdf.getPage(num);
+    const vp = page.getViewport({ scale: 3.5 });
+    const cvs = document.createElement('canvas');
+    cvs.height = vp.height;
+    cvs.width = vp.width;
+    await page.render({ canvasContext: cvs.getContext('2d'), viewport: vp }).promise;
+    cvs.toBlob(blob => renderImageWithRotation(blob));
+}
+
+function renderImageWithRotation(blob) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            if (currentRotation === 90 || currentRotation === 270) {
+                canvas.width = img.height; canvas.height = img.width;
+            } else {
+                canvas.width = img.width; canvas.height = img.height;
+            }
+            ctx.translate(canvas.width/2, canvas.height/2);
+            ctx.rotate(currentRotation * Math.PI / 180);
+            ctx.drawImage(img, -img.width/2, -img.height/2);
+            const url = canvas.toDataURL();
+            if(window.bg) { map.removeLayer(window.bg); }
+            window.bg = L.imageOverlay(url, [[0, 0], [canvas.height, canvas.width]]).addTo(map);
+            map.fitBounds([[0, 0], [canvas.height, canvas.width]]);
+            setTimeout(() => map.invalidateSize(), 200);
+        };
+        img.src = e.target.result;
+    };
+    reader.readAsDataURL(blob);
+}
+
+function rotateView() {
+    currentRotation = (currentRotation + 90) % 360;
+    db.projects.update(currentProjectId, { rotation: currentRotation });
+    if(currentPdf) loadPdfPage(currentPage); else selectProject(currentProjectId);
+}
+
+/** 4. Annotations Logic **/
+async function addAnnot(ll) {
+    const id = crypto.randomUUID(); const customData = {};
+    currentFields.forEach(f => {
+        if(f.name === "座標") customData[f.name] = map.options.crs === L.CRS.Simple ? `X:${Math.round(ll.lng)},Y:${Math.round(ll.lat)}` : `${ll.lat.toFixed(6)},${ll.lng.toFixed(6)}`;
+        else customData[f.name] = "";
+    });
+    await db.annotations.add({ id, projectId: currentProjectId, page: currentPage, type: currentMode, lat: ll.lat, lng: ll.lng, color: currentColor, customData, fieldPhotos: {}, text: 'テキスト', angle: 0, updatedAt: Date.now(), isDeleted: 0 });
+    refreshAnnotations(); openEdit(id);
+}
+
+function renderMarker(a) {
+    if(a.page !== currentPage && map.options.crs === L.CRS.Simple) return;
+    let l;
+    // ★吹き出しの内容（1行目：写真番号, 2行目：コメント）
+    const f1 = esc(a.customData?.[currentFields[0].name]);
+    const f2 = esc(a.customData?.[currentFields[1].name]);
+    const balloonContent = `<b>${f1}</b>${f2 ? `<br><span class="zoom-hide">${f2}</span>` : ''}`;
+
+    if(a.type==='pin') {
+        l = L.marker([a.lat, a.lng], { draggable: true, icon: L.divIcon({ className:'custom-pin', html:`<div style="background:${a.color}; width:24px; height:24px; border-radius:50%; border:3px solid #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.4);"></div>` }) });
+    } else if(a.type==='arrow') {
+        l = L.marker([a.lat, a.lng], { draggable: true, icon: L.divIcon({ iconSize:[40,40], iconAnchor:[20,20], html:`<svg width="40" height="40" viewBox="0 0 24 24" style="transform:rotate(${a.angle||0}deg); color:${a.color};"><path d="M12 2L19 9H15V22H9V9H5L12 2Z" fill="currentColor"/></svg>` }) });
+    } else if(a.type==='text') {
+        l = L.marker([a.lat, a.lng], { draggable: true, icon: L.divIcon({ className:`text-label`, html:`<span style="color:${a.color}">${esc(a.text)}</span>` }) });
+    } else if(a.type==='line') {
+        l = L.polyline(a.points, {color: a.color, weight:5});
+    }
+
+    if(l) {
+        if(a.type !== 'line') l.bindTooltip(balloonContent, {permanent:true, direction:'top'});
+        l.addTo(map).on('click', e => { L.DomEvent.stopPropagation(e); openEdit(a.id); });
+        l.on('dragend', async e => {
+            const p = e.target.getLatLng(); const up = {...a.customData};
+            if(up["座標"]) up["座標"] = map.options.crs === L.CRS.Simple ? `X:${Math.round(p.lng)},Y:${Math.round(p.lat)}` : `${p.lat.toFixed(6)},${p.lng.toFixed(6)}`;
+            await db.annotations.update(a.id, { lat: p.lat, lng: p.lng, customData: up, updatedAt: Date.now() });
+        });
+        markers[a.id] = {layer:l, data:a};
+    }
+}
+
+/** 5. Editor Interaction **/
+function openEdit(id) {
+    selectedId = id; const a = markers[id].data; const area = document.getElementById('dynamicInputsArea'); area.innerHTML = "";
+    for(let k in tempFieldPhotos) delete tempFieldPhotos[k]; Object.assign(tempFieldPhotos, a.fieldPhotos || {});
+    if(a.type==='text') area.innerHTML += `<label>内容</label><input id="dyn_text" value="${esc(a.text)}" oninput="syncReal()">`;
+    if(a.type==='arrow') area.innerHTML += `<label>角度</label><input type="range" id="dyn_angle" min="0" max="360" value="${a.angle}" oninput="syncReal()">`;
+    currentFields.forEach(f => {
+        const div = document.createElement('div'); div.innerHTML = `<label>${esc(f.name)}</label>`;
+        const tx = document.createElement('textarea'); tx.id = `f_${f.name}`; tx.value = a.customData[f.name] || ""; div.appendChild(tx);
+        if(f.photo) {
+            const pDiv = document.createElement('div'); pDiv.style.marginTop="5px";
+            pDiv.innerHTML = `<input type="file" accept="image/*" capture="environment" onchange="hP('${f.name}', this)" id="camera_${f.name}" style="display:none;"><button type="button" class="primary" style="margin-top:5px; width:100%;" onclick="document.getElementById('camera_${f.name}').click()">📷 カメラを起動して撮影</button>`;
+            const img = document.createElement('img'); img.id = `img_${f.name}`; img.className = "field-photo-preview";
+            if(tempFieldPhotos[f.name]) img.src = URL.createObjectURL(tempFieldPhotos[f.name]); else img.style.display="none";
+            pDiv.appendChild(img); div.appendChild(pDiv);
+        }
+        area.appendChild(div);
+    });
+    document.getElementById('edit-panel').style.display = 'block';
+}
+
+function hP(fn, inp) { if(inp.files[0]) { tempFieldPhotos[fn] = inp.files[0]; const img = document.getElementById(`img_${fn}`); img.src = URL.createObjectURL(inp.files[0]); img.style.display="block"; } }
+function syncReal() {
+    const m = markers[selectedId]; if(!m) return;
+    m.data.text = document.getElementById('dyn_text')?.value || m.data.text; m.data.angle = document.getElementById('dyn_angle')?.value || m.data.angle;
+    if(m.data.type==='text') m.layer.setIcon(L.divIcon({ className:`text-label`, html:`<span style="color:${m.data.color}">${esc(m.data.text)}</span>` }));
+    if(m.data.type==='arrow') m.layer.setIcon(L.divIcon({ iconSize:[40,40], html:`<svg width="40" height="40" viewBox="0 0 24 24" style="transform:rotate(${m.data.angle}deg); color:${m.data.color};"><path d="M12 2L19 9H15V22H9V9H5L12 2Z" fill="currentColor"/></svg>` }));
+}
+async function saveAnnot() {
+    const upData = {}; currentFields.forEach(f => upData[f.name] = document.getElementById(`f_${f.name}`).value);
+    await db.annotations.update(selectedId, { customData: upData, fieldPhotos: {...tempFieldPhotos}, text: document.getElementById('dyn_text')?.value || markers[selectedId].data.text, angle: parseInt(document.getElementById('dyn_angle')?.value || 0), color: markers[selectedId].data.color, updatedAt: Date.now() });
+    
+    // 地図上の吹き出しを即座に更新
+    const m = markers[selectedId];
+    const newBalloon = `<b>${esc(upData[currentFields[0].name])}</b>${upData[currentFields[1].name] ? `<br><span class="zoom-hide">${esc(upData[currentFields[1].name])}</span>` : ''}`;
+    if(m.layer.setTooltipContent) m.layer.setTooltipContent(newBalloon);
+    
+    closeEdit();
+}
+
+/** 6. Utilities **/
+async function loadProjects() {
+    const list = await db.projects.toArray();
+    document.getElementById('projectGrid').innerHTML = list.map(p => `<div class="project-card" style="background:white; padding:15px; border-radius:10px; cursor:pointer; box-shadow:0 2px 5px rgba(0,0,0,0.1);"><div onclick="selectProject('${p.id}')"><strong>${esc(p.name)}</strong><br><small>${esc(p.author || '--')}</small></div><button onclick="event.stopPropagation(); exportProjectFile('${p.id}', true)" style="margin-top:10px; font-size:10px; border:none; background:#eee; padding:5px 8px; border-radius:4px;">📤 共有パッケージ出力</button></div>`).join('');
+}
+async function refreshAnnotations() {
+    Object.values(markers).forEach(m => map.removeLayer(m.layer)); markers = {};
+    const saved = await db.annotations.where('projectId').equals(currentProjectId).and(a => a.isDeleted === 0).toArray();
+    saved.forEach(renderMarker);
+}
+function setupDrawing() {
+    let d = false, pts = [], line = null;
+    map.on('mousedown touchstart', e => { if(currentMode !== 'draw') return; d = true; pts = [e.latlng]; line = L.polyline(pts, {color: currentColor, weight:5}).addTo(map); map.dragging.disable(); });
+    map.on('mousemove touchmove', e => { if(d) { pts.push(e.latlng); line.setLatLngs(pts); } });
+    map.on('mouseup touchend', async () => {
+        if(!d) return; d = false; map.dragging.enable();
+        const a = { id: crypto.randomUUID(), projectId: currentProjectId, page: currentPage, type: 'line', points: pts.map(p=>[p.lat,p.lng]), color: currentColor, updatedAt: Date.now(), isDeleted: 0 };
+        await db.annotations.add(a); renderMarker(a); map.removeLayer(line);
+    });
+}
+function toggleSetupUI() { document.getElementById('pdfGroup').style.display = (document.getElementById('setupMode').value==='pdf') ? 'block' : 'none'; }
+function renderSetupFields() { document.getElementById('customFieldList').innerHTML = currentFields.map((f, i) => `<span class="badge">${esc(f.name)}${f.photo?'📷':''}${i > 2 ? `<span onclick="removeField(${i})" style="cursor:pointer;font-weight:bold;margin-left:5px;">×</span>` : ''}</span>`).join(''); }
+function addFieldToForm() { const n = document.getElementById('newFieldName').value, p = document.getElementById('newFieldPhoto').checked; if(n){ currentFields.push({name:n, photo:p}); document.getElementById('newFieldName').value=""; renderSetupFields(); } }
+function removeField(i) { currentFields.splice(i,1); renderSetupFields(); }
+async function saveCurrentAsPreset() { const name = prompt("名"); if(name){ await db.presets.add({ id: crypto.randomUUID(), name, fields: [...currentFields] }); loadPresetList(); } }
+async function loadPresetList() { const list = await db.presets.toArray(); document.getElementById('presetLoader').innerHTML = '<option value="">--</option>' + list.map(p => `<option value="${p.id}">${esc(p.name)}</option>`).join(''); }
+function loadPresetToForm() { const id = document.getElementById('presetLoader').value; if(id) db.presets.get(id).then(p => { if(p){ currentFields = [...p.fields]; renderSetupFields(); } }); }
+function setMode(m) { currentMode = m; document.querySelectorAll('.tool-btn').forEach(b => b.classList.remove('active')); document.getElementById('mode-'+m).classList.add('active'); }
+function closeEdit() { document.getElementById('edit-panel').style.display='none'; selectedId=null; }
+async function deleteAnnot() { if(confirm("消去？")) { await db.annotations.update(selectedId, {isDeleted:1, updatedAt:Date.now()}); refreshAnnotations(); closeEdit(); } }
+async function undoLast() { const last = await db.annotations.where('projectId').equals(currentProjectId).and(a => a.isDeleted === 0).reverse().sortBy('updatedAt'); if(last[0]) { await db.annotations.update(last[0].id, {isDeleted: 1, updatedAt: Date.now()}); refreshAnnotations(); } }
+
+
+async function loadImageElement(src) {
+    return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => resolve(img);
+        img.onerror = reject;
+        img.src = src;
+    });
+}
+
+function rotateCanvasDataUrl(srcCanvasOrImg, rotation) {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    const w = srcCanvasOrImg.width;
+    const h = srcCanvasOrImg.height;
+    if(rotation === 90 || rotation === 270) {
+        canvas.width = h;
+        canvas.height = w;
+    } else {
+        canvas.width = w;
+        canvas.height = h;
+    }
+    ctx.translate(canvas.width / 2, canvas.height / 2);
+    ctx.rotate(rotation * Math.PI / 180);
+    ctx.drawImage(srcCanvasOrImg, -w / 2, -h / 2);
+    return { url: canvas.toDataURL('image/png'), width: canvas.width, height: canvas.height };
+}
+
+function getReportSymbolSize(w, h) {
+    const longSide = Math.max(Number(w || 0), Number(h || 0));
+    if(longSide >= 6000) return { pin: 7, arrow: 12, line: 2, font: 7, offset: 8 };
+    if(longSide >= 4000) return { pin: 8, arrow: 14, line: 2.5, font: 8, offset: 9 };
+    if(longSide >= 2500) return { pin: 10, arrow: 16, line: 3, font: 9, offset: 11 };
+    return { pin: 12, arrow: 20, line: 3.5, font: 10, offset: 13 };
+}
+
+function reportMarkerHtml(a, w, h) {
+    const x = Math.max(0, Math.min(100, (Number(a.lng || 0) / w) * 100));
+    const y = Math.max(0, Math.min(100, (Number(a.lat || 0) / h) * 100));
+    const size = getReportSymbolSize(w, h);
+    const label = esc(a.customData?.[currentFields[0]?.name] || '');
+    const memo = esc(a.customData?.[currentFields[1]?.name] || '');
+    const color = esc(a.color || '#ff0000');
+
+    if(a.type === 'line' && Array.isArray(a.points)) {
+        const pts = a.points.map(p => `${(p[1] / w) * 1000},${(p[0] / h) * 1000}`).join(' ');
+        return `<svg style="position:absolute; inset:0; width:100%; height:100%; pointer-events:none; overflow:visible; -webkit-print-color-adjust:exact; print-color-adjust:exact;" viewBox="0 0 1000 1000" preserveAspectRatio="none"><polyline points="${pts}" fill="none" stroke="${color}" stroke-width="${size.line}" stroke-linecap="round" stroke-linejoin="round" /></svg>`;
+    }
+
+    let icon = '';
+    if(a.type === 'pin') {
+        icon = `<svg width="${size.pin + 6}" height="${size.pin + 6}" viewBox="0 0 24 24" style="display:block; overflow:visible; -webkit-print-color-adjust:exact; print-color-adjust:exact;"><circle cx="12" cy="12" r="${Math.max(4, (size.pin + 1) / 2)}" fill="${color}" stroke="#ffffff" stroke-width="2.2" /><circle cx="12" cy="12" r="${Math.max(4.7, (size.pin + 1) / 2)}" fill="none" stroke="rgba(0,0,0,.35)" stroke-width="0.8" /></svg>`;
+    } else if(a.type === 'arrow') {
+        icon = `<svg width="${size.arrow}" height="${size.arrow}" viewBox="0 0 24 24" style="transform:rotate(${Number(a.angle || 0)}deg);color:${color};filter:drop-shadow(0 1px 2px rgba(0,0,0,.45));-webkit-print-color-adjust:exact; print-color-adjust:exact;"><path d="M12 2L19 9H15V22H9V9H5L12 2Z" fill="currentColor"/></svg>`;
+    } else if(a.type === 'text') {
+        icon = `<span style="font-weight:bold;color:${color};background:rgba(255,255,255,.88);padding:1px 3px;border-radius:3px;font-size:${size.font}px;border:1px solid rgba(0,0,0,.15);-webkit-print-color-adjust:exact; print-color-adjust:exact;">${esc(a.text || '')}</span>`;
+    } else {
+        icon = `<svg width="${Math.max(8, size.pin)}" height="${Math.max(8, size.pin)}" viewBox="0 0 20 20" style="display:block; overflow:visible; -webkit-print-color-adjust:exact; print-color-adjust:exact;"><circle cx="10" cy="10" r="${Math.max(3, (size.pin - 2) / 2)}" fill="${color}" stroke="#ffffff" stroke-width="1.5" /></svg>`;
+    }
+
+    const balloon = (label || memo) ? `<div style="position:absolute;left:${size.offset}px;top:-${size.offset + 4}px;background:white;border:1px solid #666;border-radius:4px;padding:1px 4px;font-size:${size.font}px;line-height:1.15;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,.25);-webkit-print-color-adjust:exact; print-color-adjust:exact;"><b>${label}</b>${memo ? `<br>${memo}` : ''}</div>` : '';
+    return `<div style="position:absolute;left:${x}%;top:${y}%;transform:translate(-50%,-50%);z-index:3;">${icon}${balloon}</div>`;
+}
+
+async function buildReportFigure(p, list) {
+    if(!p) return '<div style="margin:12px 0; padding:10px; border:1px solid #ccc;">現場情報なし</div>';
+    if(p.mode === 'gsi') {
+        const capture = latestMapCapture || await captureCurrentMapView();
+        if(!capture) return '<div style="margin:12px 0; padding:10px; border:1px solid #ccc;">地図画像を取得できませんでした</div>';
+        const centerLat = Number(capture.center?.lat ?? 0).toFixed(6);
+        const centerLng = Number(capture.center?.lng ?? 0).toFixed(6);
+        return '<h3 style="margin-top:18px;">地図（現在の画角）</h3>' +
+            '<div style="page-break-inside:avoid; margin:10px 0 18px;">' +
+            '<div style="font-weight:bold;margin-bottom:5px;">編集画面で開いていた地図</div>' +
+            '<div style="font-size:12px; margin-bottom:6px; color:#444;">中心座標：' + centerLat + ', ' + centerLng + ' / ズーム：' + capture.zoom + '</div>' +
+            '<div style="position:relative; width:100%; border:1px solid #333; background:#eee;">' +
+            '<img src="' + capture.url + '" style="display:block;width:100%;height:auto;">' +
+            '</div></div>';
+    }
+    if(p.mode !== 'pdf') return '<div style="margin:12px 0; padding:10px; border:1px solid #ccc;">図面：出力対象外</div>';
+    const rotation = p.rotation || 0;
+    let pages = [...new Set(list.map(a => a.page || 1))].sort((a,b) => a-b);
+    if(pages.length === 0) pages = [currentPage || 1];
+    let html = '<h3 style="margin-top:18px;">図面</h3>';
+
+    if(p.pdfData) {
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+        const pdf = await pdfjsLib.getDocument({data: p.pdfData.slice ? p.pdfData.slice(0) : p.pdfData}).promise;
+        pages = pages.filter(pg => pg >= 1 && pg <= pdf.numPages);
+        for(const pg of pages) {
+            const page = await pdf.getPage(pg);
+            const vp = page.getViewport({ scale: 2.0 });
+            const cvs = document.createElement('canvas');
+            cvs.width = vp.width;
+            cvs.height = vp.height;
+            await page.render({ canvasContext: cvs.getContext('2d'), viewport: vp }).promise;
+            const rotated = rotateCanvasDataUrl(cvs, rotation);
+            const anns = list.filter(a => (a.page || 1) === pg).map(a => reportMarkerHtml(a, rotated.width, rotated.height)).join('');
+            html += `<div style="page-break-inside:avoid; margin:10px 0 18px;"><div style="font-weight:bold;margin-bottom:5px;">図面ページ ${pg}</div><div style="position:relative; width:100%; border:1px solid #333; background:#eee;"><img src="${rotated.url}" style="display:block;width:100%;height:auto;">${anns}</div></div>`;
+        }
+    } else if(p.bgBlob) {
+        const src = await blobToBase64(p.bgBlob);
+        const img = await loadImageElement(src);
+        const rotated = rotateCanvasDataUrl(img, rotation);
+        const anns = list.filter(a => (a.page || 1) === 1).map(a => reportMarkerHtml(a, rotated.width, rotated.height)).join('');
+        html += `<div style="page-break-inside:avoid; margin:10px 0 18px;"><div style="font-weight:bold;margin-bottom:5px;">図面ページ 1</div><div style="position:relative; width:100%; border:1px solid #333; background:#eee;"><img src="${rotated.url}" style="display:block;width:100%;height:auto;">${anns}</div></div>`;
+    } else {
+        html += '<div style="margin:12px 0; padding:10px; border:1px solid #ccc;">図面ファイルなし</div>';
+    }
+    return html;
+}
+
+async function loadReview() {
+    if(!currentProjectId) {
+        document.getElementById('reviewArea').innerHTML = '<p>現場を選択してください。</p>';
+        return [];
+    }
+    const p = await db.projects.get(currentProjectId);
+    const list = await db.annotations.where('projectId').equals(currentProjectId).and(a => a.isDeleted === 0).toArray();
+    const figureHtml = await buildReportFigure(p, list);
+    const rows = list.map(a => `
+        <tr>
+            <td>${esc(a.type || '')}</td>
+            <td>${esc(a.page || '')}</td>
+            ${currentFields.map(f => `<td>${esc(a.customData?.[f.name] || '')}${f.photo && a.fieldPhotos?.[f.name] ? ' 📷' : ''}</td>`).join('')}
+        </tr>
+    `).join('');
+    document.getElementById('reviewArea').innerHTML = `
+        <h2>調査報告書</h2>
+        <div style="margin-bottom:10px;">現場名：${esc(p?.name || '')}</div>
+        <div style="margin-bottom:10px;">担当者：${esc(p?.author || '')}</div>
+        ${figureHtml}
+        <h3 style="margin-top:18px;">詳細一覧</h3>
+        <table>
+            <thead><tr><th>種別</th><th>頁</th>${currentFields.map(f => `<th>${esc(f.name)}</th>`).join('')}</tr></thead>
+            <tbody>${rows || '<tr><td colspan="99">記録なし</td></tr>'}</tbody>
+        </table>
+    `;
+    return list;
+}
+
+
+async function preparePrint() {
+    if(!currentProjectId) return alert("現場を選択してください");
+    const p = await db.projects.get(currentProjectId);
+    if(p?.mode === 'gsi') {
+        try {
+            await captureCurrentMapView();
+        } catch (e) {
+            console.error(e);
+            alert('地図画像の取得に失敗しました。編集画面を一度開いてから再度お試しください。');
+            return;
+        }
+    }
+    await loadReview();
+    switchView('review');
+    setTimeout(() => window.print(), 500);
+}
+
+const csvEscape = v => `"${(v ?? '').toString().replace(/"/g, '""')}"`;
+
+async function exportCSV() {
+    if(!currentProjectId) return alert("現場を選択してください");
+    const list = await db.annotations.where('projectId').equals(currentProjectId).and(a => a.isDeleted === 0).toArray();
+    let csv = "\uFEFFtype,page," + currentFields.map(f => csvEscape(f.name)).join(",") + "\n";
+    list.forEach(a => {
+        csv += [csvEscape(a.type), csvEscape(a.page), ...currentFields.map(f => csvEscape(a.customData?.[f.name] || ""))].join(",") + "\n";
+    });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(new Blob([csv], {type:'text/csv'}));
+    link.download = "data.csv";
+    link.click();
+}
+
+async function exportGeoJSON() {
+    if(!currentProjectId) return alert("現場を選択してください");
+    const list = await db.annotations.where('projectId').equals(currentProjectId).and(a => a.isDeleted === 0).toArray();
+    const features = list.map(a => {
+        const geometry = a.type === 'line'
+            ? { type: "LineString", coordinates: (a.points || []).map(p => [p[1], p[0]]) }
+            : { type: "Point", coordinates: [a.lng, a.lat] };
+        return { type: "Feature", geometry, properties: {...(a.customData || {}), type:a.type, page:a.page, color:a.color} };
+    });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(new Blob([JSON.stringify({type:"FeatureCollection", features}, null, 2)], {type:'application/geo+json'}));
+    link.download = "data.geojson";
+    link.click();
+}
+
+async function exportProjectFile(pid, includePhotos = true) {
+    const p = await db.projects.get(pid);
+    const annts = await db.annotations.where('projectId').equals(pid).toArray();
+    const project = {...p};
+
+    if(project.pdfData) project.pdfB64 = await blobToBase64(new Blob([project.pdfData]));
+    delete project.pdfData;
+
+    if(project.bgBlob) project.bgBlobB64 = await blobToBase64(project.bgBlob);
+    delete project.bgBlob;
+
+    if(includePhotos) {
+        for(const a of annts) {
+            if(a.fieldPhotos) {
+                a.fieldPhotosB64 = {};
+                for(const k in a.fieldPhotos) a.fieldPhotosB64[k] = await blobToBase64(a.fieldPhotos[k]);
+            }
+            delete a.fieldPhotos;
+        }
+    }
+
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(new Blob([JSON.stringify({project, annotations: annts})], {type:'application/json'}));
+    link.download = `${p.name}.json`;
+    link.click();
+}
+
+async function importProject(inp) {
+    const f = inp.files[0];
+    if(!f) return;
+    try {
+        const d = JSON.parse(await f.text());
+        if(d.project.pdfB64) {
+            const res = await fetch(d.project.pdfB64);
+            d.project.pdfData = await res.arrayBuffer();
+            delete d.project.pdfB64;
+        }
+        if(d.project.bgBlobB64) {
+            const res = await fetch(d.project.bgBlobB64);
+            d.project.bgBlob = await res.blob();
+            delete d.project.bgBlobB64;
+        }
+        await db.projects.put(d.project);
+        for(const a of d.annotations || []) {
+            if(a.fieldPhotosB64) {
+                a.fieldPhotos = {};
+                for(const k in a.fieldPhotosB64) {
+                    const res = await fetch(a.fieldPhotosB64[k]);
+                    a.fieldPhotos[k] = await res.blob();
+                }
+                delete a.fieldPhotosB64;
+            }
+            await db.annotations.put(a);
+        }
+        alert("読込完了");
+        loadProjects();
+    } catch(e) {
+        console.error(e);
+        alert("読込に失敗しました");
+    } finally {
+        inp.value = "";
+    }
+}
+async function changePage(d) { if(currentPdf){ const n = currentPage+d; if(n>0 && n<=currentPdf.numPages) loadPdfPage(n); } }
+
+// Color連動修正
+document.querySelectorAll('.color-dot').forEach(dot => {
+    dot.onclick = () => {
+        document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('active'));
+        dot.classList.add('active'); currentColor = dot.dataset.color;
+        if(selectedId) {
+            markers[selectedId].data.color = currentColor;
+            syncReal(); // 配置済みアイテムの色を即座に変える
+        }
+    };
+});
+
+function isCompactScreen() {
+    return window.matchMedia('(max-width: 1100px), (hover: none) and (pointer: coarse) and (max-width: 1366px)').matches;
+}
+
+function updateFloatingToggleLabels() {
+    const menuBtn = document.getElementById('mobileNavToggle');
+    if(menuBtn) menuBtn.textContent = document.body.classList.contains('sidebar-hidden') ? '☰ メニュー' : '✕ 閉じる';
+    const mapBtn = document.getElementById('mapUiToggle');
+    if(mapBtn) mapBtn.textContent = document.body.classList.contains('map-ui-hidden') ? '🛠 ツール表示' : '🛠 ツール非表示';
+}
+
+function toggleMobileNav(forceOpen = null) {
+    const shouldOpen = forceOpen === null ? document.body.classList.contains('sidebar-hidden') : forceOpen;
+    document.body.classList.toggle('sidebar-hidden', !shouldOpen);
+    updateFloatingToggleLabels();
+}
+
+function toggleMapUi(forceOpen = null) {
+    const shouldOpen = forceOpen === null ? document.body.classList.contains('map-ui-hidden') : forceOpen;
+    document.body.classList.toggle('map-ui-hidden', !shouldOpen);
+    updateFloatingToggleLabels();
+}
+
+function applyCompactDefaults() {
+    if(!isCompactScreen()) {
+        document.body.classList.remove('sidebar-hidden');
+        document.body.classList.remove('map-ui-hidden');
+        document.body.dataset.mobileNavInitialized = '';
+        updateFloatingToggleLabels();
+        return;
+    }
+    if(!document.body.dataset.mobileNavInitialized) {
+        document.body.classList.add('sidebar-hidden');
+        document.body.dataset.mobileNavInitialized = '1';
+    }
+    if(!document.body.dataset.mapUiInitialized) {
+        document.body.classList.remove('map-ui-hidden');
+        document.body.dataset.mapUiInitialized = '1';
+    }
+    updateFloatingToggleLabels();
+}
+
+window.addEventListener('resize', applyCompactDefaults);
+window.addEventListener('orientationchange', () => setTimeout(applyCompactDefaults, 150));
+
+switchView('projects'); loadPresetList(); renderSetupFields();
+if(/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+    const hint = document.getElementById('mobileInstallHint');
+    if(hint) hint.style.display = 'block';
+}
+applyCompactDefaults();
+
+// 簡易オフライン起動対応
+if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+    window.addEventListener('load', () => {
+        const swCode = `
+            const CACHE_NAME = 'survey-pro-mobile-v1';
+            self.addEventListener('install', event => {
+                event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll([
+                    './',
+                    'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css',
+                    'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js',
+                    'https://unpkg.com/dexie@3.2.4/dist/dexie.js',
+                    'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js',
+                    'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js'
+                ])));
+            });
+            self.addEventListener('fetch', event => {
+                event.respondWith(caches.match(event.request).then(response => response || fetch(event.request)));
+            });
+        `;
+        const blob = new Blob([swCode], {type: 'text/javascript'});
+        navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(() => {});
+    });
+}
+
+</script>
+</body>
+</html>
